@@ -1,12 +1,15 @@
 """
-Career Profiles Dataset
-------------------------
+Career Profiles Dataset (Extended)
+------------------------------------
 Each career field is represented as a profile with descriptive tags.
 Tags cover: interests, values, work styles, personality traits, and themes.
 This shared vocabulary is what makes cosine similarity work accurately.
 """
 
 CAREER_PROFILES = [
+
+    # ── ORIGINAL PROFILES ────────────────────────────────────────────────────
+
     {
         "field": "Healthcare & Medicine",
         "emoji": "🏥",
@@ -48,7 +51,8 @@ CAREER_PROFILES = [
             "data", "mathematics", "problem solving", "patterns", "research",
             "technology", "statistics", "critical thinking", "innovation", "logic",
             "machine learning", "artificial intelligence", "curiosity", "analysis",
-            "computers", "continuous learning", "automation", "future", "science", "precision"
+            "computers", "continuous learning", "automation", "future", "science",
+            "precision", "data storytelling"
         ]
     },
     {
@@ -76,7 +80,7 @@ CAREER_PROFILES = [
     {
         "field": "Business & Entrepreneurship",
         "emoji": "📈",
-        "description": "Creating ventures, managing organizations, and driving economic value.",
+        "description": "Creating ventures, managing organisations, and driving economic value.",
         "tags": [
             "leadership", "innovation", "risk taking", "problem solving", "strategy",
             "communication", "independence", "ambition", "creativity", "building things",
@@ -87,7 +91,7 @@ CAREER_PROFILES = [
     {
         "field": "Finance & Accounting",
         "emoji": "💰",
-        "description": "Managing money, analyzing financial systems, and enabling economic decisions.",
+        "description": "Managing money, analysing financial systems, and enabling economic decisions.",
         "tags": [
             "mathematics", "money", "detail oriented", "analysis", "precision",
             "logic", "problem solving", "systems thinking", "data", "research",
@@ -171,5 +175,293 @@ CAREER_PROFILES = [
             "music", "entertainment", "inspiration", "people skills", "originality",
             "beauty", "passion", "collaboration", "confidence", "making things"
         ]
-    }
+    },
+
+    # ── SPORTS & FITNESS ──────────────────────────────────────────────────────
+
+    {
+        "field": "Sports, Fitness & Coaching",
+        "emoji": "🏆",
+        "description": "Training athletes, promoting physical wellness, and competing or coaching at every level.",
+        "tags": [
+            "sports", "fitness", "competition", "teamwork", "leadership",
+            "performance", "motivation", "discipline", "health", "people skills",
+            "coaching", "strategy", "resilience", "physical activity", "outdoors",
+            "community", "goal setting", "communication", "passion", "making a difference"
+        ]
+    },
+    {
+        "field": "Sports Science & Physiotherapy",
+        "emoji": "🦴",
+        "description": "Applying science to enhance athletic performance, prevent injury, and rehabilitate the body.",
+        "tags": [
+            "sports", "science", "human body", "health", "research",
+            "biology", "helping people", "precision", "problem solving", "fitness",
+            "rehabilitation", "analysis", "care", "teamwork", "performance",
+            "critical thinking", "detail oriented", "medicine", "hands on", "wellbeing"
+        ]
+    },
+    {
+        "field": "Sports Commentary & Broadcasting",
+        "emoji": "🎙️",
+        "description": "Bringing sports to life through live commentary, analysis, and broadcasting for audiences worldwide.",
+        "tags": [
+            "sports", "communication", "storytelling", "performance", "language",
+            "media", "entertainment", "passion", "current events", "research",
+            "people skills", "confidence", "culture", "interviewing", "live events",
+            "creativity", "influence", "knowledge sharing", "teamwork", "public speaking"
+        ]
+    },
+
+    # ── FOOD & HOSPITALITY ────────────────────────────────────────────────────
+
+    {
+        "field": "Culinary Arts & Baking",
+        "emoji": "🍽️",
+        "description": "Crafting exceptional food and baked goods through creativity, technique, and passion for flavour.",
+        "tags": [
+            "food", "creativity", "hands on", "craftsmanship", "making things",
+            "art", "science", "precision", "culture", "passion",
+            "innovation", "aesthetics", "detail oriented", "self expression", "originality",
+            "sensory", "entrepreneurship", "hospitality", "baking", "community"
+        ]
+    },
+    {
+        "field": "Hospitality & Food Business",
+        "emoji": "🍴",
+        "description": "Running restaurants, hotels, and food ventures where guest experience and business acumen meet.",
+        "tags": [
+            "food", "leadership", "people skills", "entrepreneurship", "hospitality",
+            "business", "communication", "teamwork", "creativity", "customer service",
+            "management", "problem solving", "money", "community", "culture",
+            "strategy", "ambition", "building things", "networking", "responsibility"
+        ]
+    },
+
+    # ── ANIMALS & NATURE ──────────────────────────────────────────────────────
+
+    {
+        "field": "Veterinary & Animal Science",
+        "emoji": "🐾",
+        "description": "Caring for animals' health, welfare, and behaviour across pets, livestock, and wildlife.",
+        "tags": [
+            "animals", "science", "biology", "helping", "care",
+            "empathy", "medicine", "health", "hands on", "nature",
+            "research", "problem solving", "compassion", "detail oriented", "critical thinking",
+            "outdoors", "responsibility", "precision", "curiosity", "making a difference"
+        ]
+    },
+
+    # ── BUSINESS & FINANCE ────────────────────────────────────────────────────
+
+    {
+        "field": "Finance, Investment & Wealth Management",
+        "emoji": "📊",
+        "description": "Growing capital, managing risk, and building financial strategies for individuals and institutions.",
+        "tags": [
+            "money", "mathematics", "strategy", "analysis", "risk taking",
+            "ambition", "patterns", "critical thinking", "data", "economics",
+            "problem solving", "logic", "leadership", "research", "precision",
+            "numbers", "future", "decision making", "responsibility", "innovation"
+        ]
+    },
+    {
+        "field": "Marketing & Brand Strategy",
+        "emoji": "📣",
+        "description": "Building brands, understanding consumers, and crafting campaigns that move people to act.",
+        "tags": [
+            "creativity", "communication", "persuasion", "storytelling", "strategy",
+            "business", "people skills", "innovation", "data", "culture",
+            "social impact", "psychology", "research", "ambition", "digital",
+            "branding", "self expression", "language", "networking", "influence"
+        ]
+    },
+    {
+        "field": "Supply Chain, Logistics & Operations",
+        "emoji": "🚚",
+        "description": "Keeping goods, services, and systems flowing efficiently across organisations and borders.",
+        "tags": [
+            "problem solving", "systems thinking", "planning", "efficiency", "logistics",
+            "mathematics", "strategy", "detail oriented", "teamwork", "technology",
+            "responsibility", "precision", "data", "economics", "critical thinking",
+            "process", "engineering", "global", "decision making", "operations"
+        ]
+    },
+    {
+        "field": "Project Management",
+        "emoji": "📋",
+        "description": "Planning, executing, and delivering projects on time and on budget across any industry.",
+        "tags": [
+            "planning", "leadership", "organisation", "teamwork", "problem solving",
+            "communication", "strategy", "responsibility", "detail oriented", "decision making",
+            "efficiency", "systems thinking", "goal setting", "collaboration", "risk management",
+            "process", "deadline driven", "critical thinking", "accountability", "coordination"
+        ]
+    },
+    {
+        "field": "Human Resources & Talent Acquisition",
+        "emoji": "🧑‍💼",
+        "description": "Finding, developing, and retaining great people while shaping positive workplace cultures.",
+        "tags": [
+            "people skills", "communication", "empathy", "listening", "organisation",
+            "leadership", "teamwork", "fairness", "problem solving", "strategy",
+            "interviewing", "talent", "culture", "collaboration", "negotiation",
+            "making a difference", "mentoring", "planning", "responsibility", "human behaviour"
+        ]
+    },
+
+    # ── CREATIVE & MEDIA ──────────────────────────────────────────────────────
+
+    {
+        "field": "Film & Television Production",
+        "emoji": "🎬",
+        "description": "Producing, directing, and creating compelling content for the screen — from concept to final cut.",
+        "tags": [
+            "creativity", "storytelling", "leadership", "collaboration", "art",
+            "communication", "technology", "detail oriented", "performance", "imagination",
+            "culture", "entertainment", "planning", "self expression", "teamwork",
+            "innovation", "problem solving", "music", "visual thinking", "passion"
+        ]
+    },
+
+    # ── TRADES & SKILLED LABOUR ───────────────────────────────────────────────
+
+    {
+        "field": "Farming & Agricultural Production",
+        "emoji": "🚜",
+        "description": "Working the land to grow food and raise livestock, balancing tradition with modern technique.",
+        "tags": [
+            "nature", "outdoors", "hands on", "animals", "responsibility",
+            "community", "sustainability", "food", "rural", "independence",
+            "biology", "environment", "resilience", "planning", "making things",
+            "physical activity", "seasons", "patience", "economics", "hard work"
+        ]
+    },
+    {
+        "field": "Plumbing & Building Services",
+        "emoji": "🔧",
+        "description": "Installing and maintaining water, gas, and heating systems that keep homes and buildings running.",
+        "tags": [
+            "hands on", "problem solving", "technical skills", "precision", "building things",
+            "independence", "trades", "engineering", "physical activity", "detail oriented",
+            "critical thinking", "responsibility", "customer service", "tools", "systems thinking",
+            "making things", "craftsmanship", "reliability", "planning", "community"
+        ]
+    },
+    {
+        "field": "Automotive Mechanics & Technology",
+        "emoji": "🔩",
+        "description": "Diagnosing, repairing, and maintaining vehicles using mechanical and electronic expertise.",
+        "tags": [
+            "hands on", "problem solving", "technology", "engineering", "precision",
+            "critical thinking", "detail oriented", "technical skills", "tools", "independence",
+            "trades", "logic", "physical activity", "cars", "systems thinking",
+            "craftsmanship", "reliability", "making things", "customer service", "innovation"
+        ]
+    },
+    {
+        "field": "Cleaning & Facilities Management",
+        "emoji": "🧹",
+        "description": "Maintaining safe, clean, and functional environments across homes, offices, and public spaces.",
+        "tags": [
+            "responsibility", "physical activity", "detail oriented", "reliability",
+            "community", "service", "hands on", "organisation", "teamwork", "health",
+            "independence", "routine", "care", "environment", "precision",
+            "customer service", "planning", "safety", "hard work", "efficiency"
+        ]
+    },
+    {
+        "field": "Elderly Care & Gerontology",
+        "emoji": "👴",
+        "description": "Supporting the health, dignity, and quality of life of older adults in homes and care settings.",
+        "tags": [
+            "helping people", "empathy", "care", "patience", "compassion",
+            "health", "community", "human behaviour", "listening", "service",
+            "making a difference", "people skills", "medicine", "responsibility", "wellbeing",
+            "teamwork", "resilience", "social impact", "hands on", "dignity"
+        ]
+    },
+
+    # ── SCIENCE & ENGINEERING ────────────────────────────────────────────────
+
+    {
+        "field": "Mining & Resources Engineering",
+        "emoji": "⛏️",
+        "description": "Extracting and processing earth's natural resources safely, sustainably, and efficiently.",
+        "tags": [
+            "engineering", "science", "outdoors", "problem solving", "technology",
+            "physical activity", "mathematics", "geology", "responsibility", "safety",
+            "systems thinking", "precision", "teamwork", "economics", "innovation",
+            "environment", "planning", "critical thinking", "logistics", "hands on"
+        ]
+    },
+    {
+        "field": "Chemical Engineering",
+        "emoji": "⚗️",
+        "description": "Transforming raw materials into useful products through chemistry, physics, and process design.",
+        "tags": [
+            "science", "chemistry", "engineering", "problem solving", "mathematics",
+            "precision", "research", "critical thinking", "innovation", "systems thinking",
+            "detail oriented", "data", "technology", "safety", "manufacturing",
+            "analysis", "logic", "continuous learning", "future", "responsibility"
+        ]
+    },
+    {
+        "field": "Mechatronics & Robotics",
+        "emoji": "🤖",
+        "description": "Merging mechanical, electrical, and software engineering to build smart automated systems.",
+        "tags": [
+            "engineering", "technology", "problem solving", "innovation", "mathematics",
+            "computers", "automation", "hands on", "critical thinking", "precision",
+            "robotics", "coding", "systems thinking", "curiosity", "future",
+            "logic", "building things", "detail oriented", "continuous learning", "creativity"
+        ]
+    },
+    {
+        "field": "Technical & Artisan Trades",
+        "emoji": "🛠️",
+        "description": "Applying specialist technical skills in electrical, welding, carpentry, and other skilled trades.",
+        "tags": [
+            "hands on", "technical skills", "craftsmanship", "problem solving", "precision",
+            "building things", "tools", "physical activity", "independence", "detail oriented",
+            "making things", "engineering", "reliability", "trades", "systems thinking",
+            "creativity", "responsibility", "logic", "community", "hard work"
+        ]
+    },
+    {
+        "field": "Research & Development (R&D)",
+        "emoji": "🔬",
+        "description": "Pushing the boundaries of knowledge and turning scientific discoveries into real-world solutions.",
+        "tags": [
+            "research", "curiosity", "science", "innovation", "critical thinking",
+            "problem solving", "data", "analysis", "continuous learning", "creativity",
+            "mathematics", "technology", "precision", "experimentation", "future",
+            "collaboration", "detail oriented", "discovery", "patience", "making a difference"
+        ]
+    },
+
+    # ── MATHEMATICS & STATISTICS ─────────────────────────────────────────────
+
+    {
+        "field": "Mathematics & Pure Sciences",
+        "emoji": "📐",
+        "description": "Exploring abstract structures, proofs, and the fundamental rules that govern the universe.",
+        "tags": [
+            "mathematics", "logic", "critical thinking", "problem solving", "patterns",
+            "precision", "research", "curiosity", "analysis", "numbers",
+            "abstract thinking", "continuous learning", "detail oriented", "science", "theory",
+            "independence", "creativity", "innovation", "academia", "discovery"
+        ]
+    },
+    {
+        "field": "Statistics & Actuarial Science",
+        "emoji": "📉",
+        "description": "Quantifying uncertainty, modelling risk, and turning numbers into strategic decisions.",
+        "tags": [
+            "mathematics", "statistics", "data", "patterns", "analysis",
+            "precision", "problem solving", "logic", "research", "critical thinking",
+            "risk", "economics", "numbers", "detail oriented", "strategy",
+            "finance", "science", "decision making", "accuracy", "future"
+        ]
+    },
 ]
