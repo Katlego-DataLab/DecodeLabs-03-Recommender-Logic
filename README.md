@@ -1,5 +1,5 @@
 # Career Path Recommender
-### Content-Based Filtering Engine | DecodeLabs Batch 2026 — Project 3
+### Content-Based Filtering Engine | DecodeLabs Batch 2026 | Project 3
 
 ---
 
