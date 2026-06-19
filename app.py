@@ -50,19 +50,31 @@ st.markdown("""
         .main-heading {
             font-family: 'Inter', sans-serif;
             font-weight: 800;
-            font-size: 4.2rem;
+            font-size: 5.5rem;
             color: #ccd6f6;
             line-height: 1.0;
             margin-bottom: 0px;
         }
 
-        /* ── SLOGAN: "Career Path" — teal, same large weight ── */
-        .slogan {
+        /* ── SECOND LINE: "Career Path" — teal ── */
+        .career-path-line {
             font-family: 'Inter', sans-serif;
             font-weight: 800;
-            font-size: 4.2rem;
+            font-size: 5.5rem;
             color: #64ffda;
             line-height: 1.0;
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+
+        /* ── SLOGAN: "recommender logic" — purple, spaced ── */
+        .slogan {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #a855f7;
+            letter-spacing: 0.15em;
+            text-transform: lowercase;
             margin-top: 0px;
             margin-bottom: 24px;
         }
@@ -235,20 +247,20 @@ st.markdown("""
             margin-bottom: 16px;
         }
 
-        .suggestion-chip-btn {
+        .suggestion-pill {
             display: inline-block;
             background-color: #112240;
             border: 1px solid #233554;
             color: #8892b0;
-            border-radius: 999px;
-            padding: 6px 16px;
-            font-size: 0.82rem;
-            cursor: pointer;
-            transition: border-color 0.2s, color 0.2s;
+            border-radius: 12px;
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
             white-space: nowrap;
+            cursor: default;
         }
 
-        .suggestion-chip-btn:hover {
+        .suggestion-pill:hover {
             border-color: #64ffda;
             color: #64ffda;
         }
@@ -269,7 +281,8 @@ st.markdown("""
 # ─────────────────────────────────────────────
 
 st.markdown('<p class="main-heading">Find Your</p>', unsafe_allow_html=True)
-st.markdown('<p class="slogan">Career Path</p>', unsafe_allow_html=True)
+st.markdown('<p class="career-path-line">Career Path</p>', unsafe_allow_html=True)
+st.markdown('<p class="slogan">— recommender logic —</p>', unsafe_allow_html=True)
 st.markdown(
     '<p class="subtitle">Add your interests and values below — '
     'the engine matches you to your most aligned careers using TF-IDF + Cosine Similarity.</p>',
@@ -291,14 +304,34 @@ suggestions = [
     "music", "community", "mathematics", "storytelling", "independence"
 ]
 
-# Render suggestion chips in horizontal wrapping rows (6 per row)
-row_size = 6
-for row_start in range(0, len(suggestions), row_size):
-    row_items = suggestions[row_start:row_start + row_size]
-    cols = st.columns(len(row_items))
-    for idx, sug in enumerate(row_items):
+# Style the suggestion buttons to look like horizontal pills with full text
+st.markdown("""
+    <style>
+        /* Override suggestion buttons to pill style, full text, auto-width */
+        [data-testid="stHorizontalBlock"] .stButton > button {
+            border-radius: 12px !important;
+            padding: 7px 16px !important;
+            font-size: 0.82rem !important;
+            font-weight: 500 !important;
+            white-space: nowrap !important;
+            width: auto !important;
+            min-width: 0 !important;
+            border-color: #233554 !important;
+            color: #8892b0 !important;
+        }
+        [data-testid="stHorizontalBlock"] .stButton > button:hover {
+            border-color: #64ffda !important;
+            color: #64ffda !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+col_groups = [suggestions[i:i+6] for i in range(0, len(suggestions), 6)]
+for group in col_groups:
+    cols = st.columns(len(group))
+    for idx, sug in enumerate(group):
         with cols[idx]:
-            if st.button(sug, key=f"sug_{row_start + idx}"):
+            if st.button(sug, key=f"sug_{suggestions.index(sug)}"):
                 if sug not in st.session_state.interests and len(st.session_state.interests) < 6:
                     st.session_state.interests.append(sug)
                     st.rerun()
