@@ -284,7 +284,7 @@ st.markdown('<p class="main-heading">Find Your</p>', unsafe_allow_html=True)
 st.markdown('<p class="career-path-line">Career Path</p>', unsafe_allow_html=True)
 st.markdown('<p class="slogan">— recommender logic —</p>', unsafe_allow_html=True)
 st.markdown(
-    '<p class="subtitle">Add your interests and values below — '
+    '<p class="subtitle">Add your interests and values below'
     'the engine matches you to your most aligned careers using TF-IDF + Cosine Similarity.</p>',
     unsafe_allow_html=True
 )
