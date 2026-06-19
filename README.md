@@ -34,10 +34,10 @@ Ranked Career Matches + Match % + Explanation
 ## Why These Algorithms?
 
 **TF-IDF over binary matching:**
-Simple tag counting treats "helping people" and "software" as equally important. TF-IDF weights terms by how specific they are — rare, descriptive tags carry more influence than generic ones, producing more nuanced recommendations.
+Simple tag counting treats "helping people" and "software" as equally important. TF-IDF weights terms by how specific they are rare, descriptive tags carry more influence than generic ones, producing more nuanced recommendations.
 
 **Cosine Similarity over Euclidean Distance:**
-Euclidean distance is sensitive to vector magnitude. A user who enters 6 interests would unfairly outscore a user who enters 3 — even if their profile direction is identical. Cosine similarity measures the *angle* between vectors, making it magnitude-invariant and far more accurate for text data.
+Euclidean distance is sensitive to vector magnitude. A user who enters 6 interests would unfairly outscore a user who enters 3 even if their profile direction is identical. Cosine similarity measures the angle between vectors, making it magnitude-invariant and far more accurate for text data.
 
 ---
 
@@ -46,7 +46,7 @@ Euclidean distance is sensitive to vector magnitude. A user who enters 6 interes
 - Accepts 3–6 free-text interest/value inputs
 - TF-IDF + Cosine Similarity computed from scratch (no sklearn)
 - 15 career field profiles across diverse domains
-- Interpretability layer: shows *which inputs drove each recommendation*
+- Interpretability layer: shows which inputs drove each recommendation
 - Cold start handler: fallback to trending paths when input is empty
 - Clean Streamlit UI with match score progress bars
 
