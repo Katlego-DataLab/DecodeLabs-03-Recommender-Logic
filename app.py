@@ -17,10 +17,20 @@ from recommender import recommend
 # ─────────────────────────────────────────────
 
 st.set_page_config(
-    page_title="Career Path Recommender",
+    page_title="Find Your Path",
     page_icon="🧭",
     layout="centered"
 )
+
+# ─────────────────────────────────────────────
+# SESSION STATE — interest chips
+# ─────────────────────────────────────────────
+
+if "interests" not in st.session_state:
+    st.session_state.interests = []
+
+if "input_value" not in st.session_state:
+    st.session_state.input_value = ""
 
 # ─────────────────────────────────────────────
 # CUSTOM STYLING
@@ -28,19 +38,50 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-        /* Main background */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;600;700;800&display=swap');
+
+        /* ── BACKGROUND ── */
         .stApp {
             background-color: #0a192f;
             color: #ccd6f6;
         }
 
-        /* Input labels */
+        /* ── MAIN HEADING: "Find Your Path" ── */
+        /* Inter 800 — bold, clean, modern (like Image 2) */
+        .main-heading {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            color: #ccd6f6;
+            line-height: 1.1;
+            margin-bottom: 0px;
+        }
+
+        /* ── SLOGAN: "Career Recommender" ── */
+        /* Dancing Script — elegant cursive (like Image 1 Grindline style) */
+        .slogan {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #a855f7;
+            line-height: 1.2;
+            margin-top: 0px;
+            margin-bottom: 20px;
+        }
+
+        /* ── SUBTITLE ── */
+        .subtitle {
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+
+        /* ── INPUT LABELS ── */
         label {
             color: #8892b0 !important;
             font-size: 0.9rem !important;
         }
 
-        /* Text inputs — pink */
+        /* ── TEXT INPUT (for adding interests) ── */
         .stTextInput > div > div > input {
             background-color: rgba(255, 107, 157, 0.07);
             color: #ccd6f6;
@@ -58,15 +99,15 @@ st.markdown("""
             box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.15);
         }
 
-        /* Primary button — mint green */
+        /* ── BUTTONS ── */
         .stButton > button {
             background-color: transparent;
             color: #64ffda;
             border: 1px solid #64ffda;
             border-radius: 8px;
-            padding: 12px 32px;
+            padding: 10px 28px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             width: 100%;
             transition: background 0.2s ease;
         }
@@ -76,7 +117,48 @@ st.markdown("""
             color: #64ffda;
         }
 
-        /* Result cards */
+        /* ── INTEREST CHIPS ── */
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 14px;
+            background-color: #112240;
+            border: 1px solid #233554;
+            border-radius: 10px;
+            min-height: 54px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(168, 85, 247, 0.12);
+            border: 1px solid #a855f7;
+            color: #ccd6f6;
+            border-radius: 999px;
+            padding: 5px 14px;
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        .chip-x {
+            color: #a855f7;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 2px;
+        }
+
+        .chips-empty {
+            color: #4a5568;
+            font-size: 0.82rem;
+            font-style: italic;
+        }
+
+        /* ── RESULT CARDS ── */
         .career-card {
             background-color: #112240;
             border: 1px solid #233554;
@@ -133,7 +215,7 @@ st.markdown("""
             margin: 3px 3px 0 0;
         }
 
-        /* Rank badges */
+        /* ── RANK BADGES ── */
         .rank-badge {
             display: inline-block;
             border-radius: 999px;
@@ -145,14 +227,9 @@ st.markdown("""
 
         .rank-1 { background-color: #ff6b9d; color: #0a192f; }
         .rank-2 { background-color: #64ffda; color: #0a192f; }
-        .rank-3 { background-color: #ccd6f6; color: #0a192f; }
+        .rank-3 { background-color: #a855f7; color: #ffffff; }
 
-        /* Divider */
-        hr {
-            border-color: #233554;
-        }
-
-        /* Suggestion chips */
+        /* ── SUGGESTION CHIPS ── */
         .suggestion-chip {
             display: inline-block;
             background-color: #112240;
@@ -164,9 +241,13 @@ st.markdown("""
             margin: 3px;
         }
 
-        /* Hide streamlit default elements */
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
+        /* ── DIVIDER ── */
+        hr { border-color: #233554; }
+
+        /* ── HIDE STREAMLIT DEFAULTS ── */
+        #MainMenu { visibility: hidden; }
+        footer { visibility: hidden; }
+        .stDeployButton { display: none; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -175,78 +256,98 @@ st.markdown("""
 # HEADER
 # ─────────────────────────────────────────────
 
-st.markdown("## 🧭 Career Path Recommender")
+st.markdown('<p class="main-heading">Find Your Path</p>', unsafe_allow_html=True)
+st.markdown('<p class="slogan">Career Recommender</p>', unsafe_allow_html=True)
 st.markdown(
-    "Enter at least **3 interests, values, or things you enjoy** — "
-    "and the engine will match you to your most aligned career paths using AI similarity logic."
+    '<p class="subtitle">Add your interests and values below — '
+    'the engine matches you to your most aligned careers using TF-IDF + Cosine Similarity.</p>',
+    unsafe_allow_html=True
 )
 
 st.markdown("---")
 
 # ─────────────────────────────────────────────
-# SUGGESTION CHIPS (UX HINT)
+# SUGGESTION CHIPS
 # ─────────────────────────────────────────────
 
-st.markdown("**Need inspiration? Try words like:**")
+st.markdown("**Need inspiration? Click to add:**")
+
 suggestions = [
     "helping people", "creativity", "problem solving", "working with data",
     "nature", "writing", "leadership", "making a difference",
     "technology", "art", "justice", "building things", "research",
     "music", "community", "mathematics", "storytelling", "independence"
 ]
-chips_html = " ".join([f'<span class="suggestion-chip">{s}</span>' for s in suggestions])
-st.markdown(chips_html, unsafe_allow_html=True)
+
+# Render suggestion chips as buttons in a horizontal scroll row
+sug_cols = st.columns(len(suggestions))
+for idx, sug in enumerate(suggestions):
+    with sug_cols[idx]:
+        if st.button(sug, key=f"sug_{idx}"):
+            if sug not in st.session_state.interests and len(st.session_state.interests) < 6:
+                st.session_state.interests.append(sug)
+                st.rerun()
 
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
-# USER INPUT FORM
+# INTEREST CHIPS DISPLAY
 # ─────────────────────────────────────────────
 
-st.markdown("**Your Interests & Values**")
+st.markdown("**Your Selected Interests**")
 
-col1, col2 = st.columns(2)
+# Show existing chips with individual X buttons
+if st.session_state.interests:
+    # Render chips as HTML display
+    chips_html = "".join([
+        f'<span class="chip">{interest} <span class="chip-x">✕</span></span>'
+        for interest in st.session_state.interests
+    ])
+    st.markdown(f'<div class="chips-container">{chips_html}</div>', unsafe_allow_html=True)
 
-with col1:
-    input1 = st.text_input("Interest 1", placeholder="e.g. helping people", key="i1")
-    input2 = st.text_input("Interest 2", placeholder="e.g. creativity", key="i2")
-    input3 = st.text_input("Interest 3", placeholder="e.g. problem solving", key="i3")
-
-with col2:
-    input4 = st.text_input("Interest 4 (optional)", placeholder="e.g. working with data", key="i4")
-    input5 = st.text_input("Interest 5 (optional)", placeholder="e.g. making a difference", key="i5")
-    input6 = st.text_input("Interest 6 (optional)", placeholder="e.g. leadership", key="i6")
+    # Actual remove buttons (functional, one per chip)
+    st.markdown("**Remove an interest:**")
+    remove_cols = st.columns(min(len(st.session_state.interests), 3))
+    for idx, interest in enumerate(st.session_state.interests):
+        with remove_cols[idx % 3]:
+            if st.button(f"✕ {interest}", key=f"rm_{idx}"):
+                st.session_state.interests.pop(idx)
+                st.rerun()
+else:
+    st.markdown(
+        '<div class="chips-container"><span class="chips-empty">No interests added yet — type below or click a suggestion above</span></div>',
+        unsafe_allow_html=True
+    )
 
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────
-# CLEAR INDIVIDUAL INPUTS
+# ADD INTEREST INPUT
 # ─────────────────────────────────────────────
 
-# Clear buttons per input — only show if field has content
-clear_col1, clear_col2 = st.columns(2)
+st.markdown("**Add an Interest or Value**")
 
-with clear_col1:
-    if input1 and st.button("✕ Clear Interest 1", key="c1"):
-        st.session_state["i1"] = ""
-        st.rerun()
-    if input2 and st.button("✕ Clear Interest 2", key="c2"):
-        st.session_state["i2"] = ""
-        st.rerun()
-    if input3 and st.button("✕ Clear Interest 3", key="c3"):
-        st.session_state["i3"] = ""
-        st.rerun()
+add_col, btn_col = st.columns([4, 1])
 
-with clear_col2:
-    if input4 and st.button("✕ Clear Interest 4", key="c4"):
-        st.session_state["i4"] = ""
-        st.rerun()
-    if input5 and st.button("✕ Clear Interest 5", key="c5"):
-        st.session_state["i5"] = ""
-        st.rerun()
-    if input6 and st.button("✕ Clear Interest 6", key="c6"):
-        st.session_state["i6"] = ""
-        st.rerun()
+with add_col:
+    new_interest = st.text_input(
+        "Type an interest",
+        placeholder="e.g. helping people, creativity, problem solving...",
+        label_visibility="collapsed",
+        key="new_interest_input"
+    )
+
+with btn_col:
+    if st.button("＋ Add"):
+        cleaned = new_interest.strip()
+        if cleaned and cleaned not in st.session_state.interests:
+            if len(st.session_state.interests) < 6:
+                st.session_state.interests.append(cleaned)
+                st.rerun()
+            else:
+                st.warning("Maximum 6 interests reached.")
+        elif cleaned in st.session_state.interests:
+            st.warning("Already added!")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -254,15 +355,14 @@ st.markdown("<br>", unsafe_allow_html=True)
 # ACTION BUTTONS
 # ─────────────────────────────────────────────
 
-btn_col1, btn_col2 = st.columns([3, 1])
+run_col, clear_col = st.columns([3, 1])
 
-with btn_col1:
+with run_col:
     run = st.button("Find My Career Paths →")
 
-with btn_col2:
+with clear_col:
     if st.button("✕ Clear All"):
-        for key in ["i1", "i2", "i3", "i4", "i5", "i6"]:
-            st.session_state[key] = ""
+        st.session_state.interests = []
         st.rerun()
 
 # ─────────────────────────────────────────────
@@ -270,11 +370,10 @@ with btn_col2:
 # ─────────────────────────────────────────────
 
 if run:
-    raw_inputs = [input1, input2, input3, input4, input5, input6]
-    user_inputs = [i.strip() for i in raw_inputs if i.strip()]
+    user_inputs = st.session_state.interests
 
     if len(user_inputs) < 3:
-        st.warning("Please enter at least 3 interests for an accurate match.")
+        st.warning("Please add at least 3 interests for an accurate match.")
     else:
         with st.spinner("Running similarity engine..."):
             results = recommend(user_inputs, top_n=3)
@@ -313,7 +412,7 @@ if run:
         st.markdown("---")
 
 st.markdown(
-    "<p style='color:#8b949e; font-size:0.82rem; text-align:center;'>"
+    "<p style='color:#8b949e; font-size:0.82rem; text-align:center; margin-top: 40px;'>"
     "Powered by TF-IDF + Cosine Similarity · DecodeLabs Batch 2026<br>"
     "Built with 🤍 by <span style='color:#ff6b9d;'>Katlego Mathebula</span>"
     "</p>",
