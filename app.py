@@ -38,7 +38,7 @@ if "input_value" not in st.session_state:
 
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
         /* ── BACKGROUND ── */
         .stApp {
@@ -46,27 +46,25 @@ st.markdown("""
             color: #ccd6f6;
         }
 
-        /* ── MAIN HEADING: "Find Your Path" ── */
-        /* Inter 800 — bold, clean, modern (like Image 2) */
+        /* ── MAIN HEADING: "Find Your" ── */
         .main-heading {
             font-family: 'Inter', sans-serif;
             font-weight: 800;
-            font-size: 2.8rem;
+            font-size: 4.2rem;
             color: #ccd6f6;
-            line-height: 1.1;
+            line-height: 1.0;
             margin-bottom: 0px;
         }
 
-        /* ── SLOGAN: "Career Recommender" ── */
-        /* Dancing Script — elegant cursive (like Image 1 Grindline style) */
+        /* ── SLOGAN: "Career Path" — teal, same large weight ── */
         .slogan {
-            font-family: 'Dancing Script', cursive;
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: #a855f7;
-            line-height: 1.2;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 4.2rem;
+            color: #64ffda;
+            line-height: 1.0;
             margin-top: 0px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         /* ── SUBTITLE ── */
@@ -229,16 +227,30 @@ st.markdown("""
         .rank-2 { background-color: #64ffda; color: #0a192f; }
         .rank-3 { background-color: #a855f7; color: #ffffff; }
 
-        /* ── SUGGESTION CHIPS ── */
-        .suggestion-chip {
+        /* ── SUGGESTION CHIPS ROW ── */
+        .suggestion-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .suggestion-chip-btn {
             display: inline-block;
             background-color: #112240;
             border: 1px solid #233554;
             color: #8892b0;
             border-radius: 999px;
-            padding: 4px 12px;
-            font-size: 0.78rem;
-            margin: 3px;
+            padding: 6px 16px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+
+        .suggestion-chip-btn:hover {
+            border-color: #64ffda;
+            color: #64ffda;
         }
 
         /* ── DIVIDER ── */
@@ -256,8 +268,8 @@ st.markdown("""
 # HEADER
 # ─────────────────────────────────────────────
 
-st.markdown('<p class="main-heading">Find Your Path</p>', unsafe_allow_html=True)
-st.markdown('<p class="slogan">Career Recommender</p>', unsafe_allow_html=True)
+st.markdown('<p class="main-heading">Find Your</p>', unsafe_allow_html=True)
+st.markdown('<p class="slogan">Career Path</p>', unsafe_allow_html=True)
 st.markdown(
     '<p class="subtitle">Add your interests and values below — '
     'the engine matches you to your most aligned careers using TF-IDF + Cosine Similarity.</p>',
@@ -279,14 +291,17 @@ suggestions = [
     "music", "community", "mathematics", "storytelling", "independence"
 ]
 
-# Render suggestion chips as buttons in a horizontal scroll row
-sug_cols = st.columns(len(suggestions))
-for idx, sug in enumerate(suggestions):
-    with sug_cols[idx]:
-        if st.button(sug, key=f"sug_{idx}"):
-            if sug not in st.session_state.interests and len(st.session_state.interests) < 6:
-                st.session_state.interests.append(sug)
-                st.rerun()
+# Render suggestion chips in horizontal wrapping rows (6 per row)
+row_size = 6
+for row_start in range(0, len(suggestions), row_size):
+    row_items = suggestions[row_start:row_start + row_size]
+    cols = st.columns(len(row_items))
+    for idx, sug in enumerate(row_items):
+        with cols[idx]:
+            if st.button(sug, key=f"sug_{row_start + idx}"):
+                if sug not in st.session_state.interests and len(st.session_state.interests) < 6:
+                    st.session_state.interests.append(sug)
+                    st.rerun()
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -304,15 +319,6 @@ if st.session_state.interests:
         for interest in st.session_state.interests
     ])
     st.markdown(f'<div class="chips-container">{chips_html}</div>', unsafe_allow_html=True)
-
-    # Actual remove buttons (functional, one per chip)
-    st.markdown("**Remove an interest:**")
-    remove_cols = st.columns(min(len(st.session_state.interests), 3))
-    for idx, interest in enumerate(st.session_state.interests):
-        with remove_cols[idx % 3]:
-            if st.button(f"✕ {interest}", key=f"rm_{idx}"):
-                st.session_state.interests.pop(idx)
-                st.rerun()
 else:
     st.markdown(
         '<div class="chips-container"><span class="chips-empty">No interests added yet — type below or click a suggestion above</span></div>',
