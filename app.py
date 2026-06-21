@@ -67,21 +67,21 @@ st.markdown("""
         #MainMenu { visibility: hidden; }
         .stDeployButton { display: none; }
 
-        /* ── MAIN HEADING: "Find Your" — now pink, 1.6x size ── */
+        /* ── MAIN HEADING: "Find Your" — pink, size doubled ── */
         .main-heading {
             font-family: 'Inter', sans-serif;
             font-weight: 800;
-            font-size: 8.8rem;
+            font-size: 17.6rem;
             color: #ff6b9d;
             line-height: 1.0;
             margin-bottom: 0px;
         }
 
-        /* ── SECOND LINE: "Career Path" — aqua, unchanged colour, 1.6x size ── */
+        /* ── SECOND LINE: "Career Path" — aqua, unchanged colour, size doubled ── */
         .career-path-line {
             font-family: 'Inter', sans-serif;
             font-weight: 800;
-            font-size: 8.8rem;
+            font-size: 17.6rem;
             color: #64ffda;
             line-height: 1.0;
             margin-top: 0px;
@@ -148,16 +148,12 @@ st.markdown("""
             color: #64ffda;
         }
 
-        /* ── SELECTED INTEREST CHIPS (now real, removable buttons) ── */
-        .st-key-chips_row > div {
-            display: flex !important;
-            flex-wrap: wrap !important;
-            gap: 8px;
-            align-items: center;
-            padding: 14px;
+        /* ── SELECTED INTEREST CHIPS BOX (background/border, holds the horizontal row) ── */
+        .st-key-chips_box {
             background-color: #112240;
             border: 1px solid #233554;
             border-radius: 10px;
+            padding: 14px;
             min-height: 26px;
         }
 
@@ -377,13 +373,9 @@ suggestions = [
     "building things",        # Engineering, Tech, Trades
 ]
 
-with st.container(key="suggestions_row"):
-    col_groups = [suggestions[i:i + 5] for i in range(0, len(suggestions), 5)]
-    for group in col_groups:
-        cols = st.columns(len(group))
-        for idx, sug in enumerate(group):
-            with cols[idx]:
-                st.button(sug, key=f"sug_{sug}", on_click=add_suggestion(sug))
+with st.container(key="suggestions_row", horizontal=True, gap="xsmall"):
+    for sug in suggestions:
+        st.button(sug, key=f"sug_{sug}", on_click=add_suggestion(sug))
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -394,13 +386,14 @@ st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("**Your Selected Interests**")
 
 if st.session_state.interests:
-    with st.container(key="chips_row"):
-        for i, interest in enumerate(st.session_state.interests):
-            st.button(
-                f"{interest}  ✕",
-                key=f"remove_{i}_{interest}",
-                on_click=remove_interest(i)
-            )
+    with st.container(key="chips_box"):
+        with st.container(key="chips_row", horizontal=True, gap="xsmall"):
+            for i, interest in enumerate(st.session_state.interests):
+                st.button(
+                    f"{interest}  ✕",
+                    key=f"remove_{i}_{interest}",
+                    on_click=remove_interest(i)
+                )
 else:
     st.markdown(
         '<div class="chips-empty">No interests added yet — type below or click a suggestion above</div>',
