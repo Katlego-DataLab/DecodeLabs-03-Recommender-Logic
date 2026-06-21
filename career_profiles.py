@@ -1,10 +1,21 @@
 """
-Career Profiles Dataset (Extended)
-------------------------------------
-Each career field is represented as a profile with descriptive tags.
-Tags cover: interests, values, work styles, personality traits, and themes.
-This shared vocabulary is what makes cosine similarity work accurately.
+Career Path Recommender — Matching Engine
+─────────────────────────────────────────────
+Content-based filtering: each career field is represented as a "profile"
+of descriptive tags (interests, values, work styles, traits, themes).
+A user's selected interests are vectorised with the same vocabulary and
+compared against every profile using TF-IDF + Cosine Similarity.
+
+Built by: Katlego Mathebula
+Internship: DecodeLabs 2026 | Project 3
 """
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+# ─────────────────────────────────────────────
+# CAREER PROFILES DATASET
+# ─────────────────────────────────────────────
 
 CAREER_PROFILES = [
 
@@ -465,3 +476,62 @@ CAREER_PROFILES = [
         ]
     },
 ]
+
+
+def _profile_text(profile):
+    """Flatten a profile's tags into a single space-separated document."""
+    return " ".join(profile["tags"])
+
+
+def recommend(user_inputs, top_n=3):
+    """
+    Compare the user's selected interests against every career profile
+    using TF-IDF vectorisation + Cosine Similarity, and return the
+    top_n best-matching careers.
+
+    Returns a list of dicts:
+        field, emoji, description, score (0-1 float),
+        match_percentage (display string), matched_inputs (list[str])
+    """
+    if not user_inputs:
+        return []
+
+    user_doc = " ".join(user_inputs)
+    corpus = [_profile_text(p) for p in CAREER_PROFILES] + [user_doc]
+
+    vectorizer = TfidfVectorizer(stop_words="english")
+    tfidf_matrix = vectorizer.fit_transform(corpus)
+
+    user_vector = tfidf_matrix[-1]
+    profile_vectors = tfidf_matrix[:-1]
+
+    similarities = cosine_similarity(user_vector, profile_vectors).flatten()
+
+    ranked_indices = similarities.argsort()[::-1][:top_n]
+
+    results = []
+    for idx in ranked_indices:
+        profile = CAREER_PROFILES[idx]
+        score = float(similarities[idx])
+
+        # Which of the user's own inputs actually relate to this profile's tags
+        matched = [
+            ui for ui in user_inputs
+            if any(
+                ui.lower() in tag.lower() or tag.lower() in ui.lower()
+                for tag in profile["tags"]
+            )
+        ]
+        if not matched:
+            matched = user_inputs[:3]
+
+        results.append({
+            "field": profile["field"],
+            "emoji": profile["emoji"],
+            "description": profile["description"],
+            "score": score,
+            "match_percentage": f"{round(score * 100)}%",
+            "matched_inputs": matched
+        })
+
+    return results
