@@ -47,7 +47,7 @@ MAX_INTERESTS = 6
 
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
         /* ── BACKGROUND ── */
         .stApp {
@@ -67,64 +67,43 @@ st.markdown("""
         #MainMenu { visibility: hidden; }
         .stDeployButton { display: none; }
 
-        /* ── MAIN HEADING: "Find Your" ── */
+        /* ── MAIN HEADING: "Find Your" — pink, size doubled ── */
         .main-heading {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: 3rem;
-            color: #ccd6f6;
-            line-height: 0.9;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 3.5rem;
+            color: #ff6b9d;
+            line-height: 1.0;
             margin-bottom: 0px;
-            letter-spacing: -0.02em;
         }
 
-        /* ── SECOND LINE: "CAREER PATH" — purple gradient + glow ── */
+        /* ── SECOND LINE: "Career Path" — aqua, unchanged colour, size doubled ── */
         .career-path-line {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: 4rem;
-            line-height: 0.9;
-            margin-top: 4px;
-            margin-bottom: 18px;
-            letter-spacing: -0.02em;
-            background: linear-gradient(90deg, #A855F7, #C084FC);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: none;
-            filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.35));
-        }
-
-        /* ── SLOGAN: "Find Your Future." ── */
-        .slogan {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            color: #a855f7;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 17.6rem;
+            color: #64ffda;
+            line-height: 1.0;
             margin-top: 0px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        /* ── VALUE PROP ── */
+        /* ── SLOGAN: "recommender logic" — purple, spaced, unchanged ── */
+        .slogan {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #a855f7;
+            letter-spacing: 0.15em;
+            text-transform: lowercase;
+            margin-top: 0px;
+            margin-bottom: 24px;
+        }
+
+        /* ── SUBTITLE ── */
         .subtitle {
             color: #8892b0;
-            font-family: 'Inter', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 400;
-            margin-top: 0;
-            margin-bottom: 8px;
-        }
-
-        /* ── RESPONSIVE TITLE SIZING ── */
-        @media (max-width: 768px) {
-            .main-heading { font-size: 2rem; }
-            .career-path-line { font-size: 2.8rem; }
-        }
-        @media (max-width: 480px) {
-            .main-heading { font-size: 1.6rem; }
-            .career-path-line { font-size: 2.2rem; }
+            font-size: 0.9rem;
         }
 
         /* ── INPUT LABELS ── */
@@ -364,10 +343,12 @@ def clear_all():
 # ─────────────────────────────────────────────
 
 st.markdown('<p class="main-heading">Find Your</p>', unsafe_allow_html=True)
-st.markdown('<p class="career-path-line">CAREER PATH</p>', unsafe_allow_html=True)
-st.markdown('<p class="slogan">Find Your Future.</p>', unsafe_allow_html=True)
+st.markdown('<p class="career-path-line">Career Path</p>', unsafe_allow_html=True)
+st.markdown('<p class="slogan">— recommender logic —</p>', unsafe_allow_html=True)
 st.markdown(
-    '<p class="subtitle">Turn your interests into career opportunities.</p>',
+    '<p class="subtitle">Tell us what interests you, what you enjoy doing, and what matters '
+    'most to you. We\'ll compare your interests with different career paths and recommend the '
+    'ones that are the best match for you. It\'s a simple way to discover careers that fit who you are.</p>',
     unsafe_allow_html=True
 )
 
