@@ -1,5 +1,5 @@
 # 🧭 Career Path Recommender
-### recommender logic — DecodeLabs Batch 2026 | Project 03
+### recommender logic, DecodeLabs Batch 2026 | Project 03
 
 ---
 
@@ -17,7 +17,7 @@
 
 ## Overview
 
-A recommendation system that maps a user's personal interests and values to the most aligned career fields using **TF-IDF vectorization** and **Cosine Similarity** — built entirely from scratch without ML libraries.
+A recommendation system that maps a user's personal interests and values to the most aligned career fields using **TF-IDF vectorization** and **Cosine Similarity** built entirely from scratch without ML libraries.
 
 The system solves a real problem: people struggle to identify career paths that genuinely match who they are, not just what they studied. By treating career exploration as a pattern-matching problem, this engine delivers objective, ranked guidance through pure algorithmic logic.
 
