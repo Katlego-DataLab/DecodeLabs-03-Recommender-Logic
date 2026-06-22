@@ -67,34 +67,25 @@ st.markdown("""
         #MainMenu { visibility: hidden; }
         .stDeployButton { display: none; }
 
-         /* ── MAIN HEADING: "Find Your" ── pink */
+        /* ── MAIN HEADING: "Find Your" — pink, size doubled ── */
         .main-heading {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 38px;
-            color: #ccd6f6;
-            line-height: 1.1;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 3.5rem;
+            color: #ff6b9d;
+            line-height: 1.0;
             margin-bottom: 0px;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
         }
 
-        /* ── SECOND LINE: "CAREER PATH" —  aqua gradient + glow ── */
+        /* ── SECOND LINE: "Career Path" — aqua, unchanged colour, size doubled ── */
         .career-path-line {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 38px;
-            line-height: 1.1;
-            margin-top: 2px;
-            margin-bottom: 18px;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #A855F7, #C084FC);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: none;
-            filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.35));
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 17.6rem;
+            color: #64ffda;
+            line-height: 1.0;
+            margin-top: 0px;
+            margin-bottom: 10px;
         }
 
         /* ── SLOGAN: "recommender logic" — purple, spaced, unchanged ── */
