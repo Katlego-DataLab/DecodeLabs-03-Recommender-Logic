@@ -67,7 +67,7 @@ st.markdown("""
         #MainMenu { visibility: hidden; }
         .stDeployButton { display: none; }
 
-         /* ── MAIN HEADING: "Find Your" ── */
+         /* ── MAIN HEADING: "Find Your" ── pink */
         .main-heading {
             font-family: 'Space Grotesk', 'Inter', sans-serif;
             font-weight: 700;
@@ -79,7 +79,7 @@ st.markdown("""
             text-transform: uppercase;
         }
 
-        /* ── SECOND LINE: "CAREER PATH" — purple gradient + glow ── */
+        /* ── SECOND LINE: "CAREER PATH" —  aqua gradient + glow ── */
         .career-path-line {
             font-family: 'Space Grotesk', 'Inter', sans-serif;
             font-weight: 700;
