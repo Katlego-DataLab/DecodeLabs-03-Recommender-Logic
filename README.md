@@ -10,7 +10,7 @@
 ![Status](https://img.shields.io/badge/Status-Deployed-brightgreen?style=for-the-badge)
 ![DecodeLabs](https://img.shields.io/badge/DecodeLabs-2026-ff6b9d?style=for-the-badge)
 
-## TRY TTHE LIVE 
+## Try the LIVE 
 [![Live App](https://img.shields.io/badge/▶%20LIVE%20APP-Open%20in%20Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white&labelColor=1a0000)](https://decodelabs-03-recommender-logic-project03mathebula03katlego.streamlit.app/)
 
 ---
@@ -46,10 +46,10 @@ Ranked Career Matches + Match % + Explanation
 ## Why These Algorithms?
 
 **TF-IDF over binary matching:**
-Simple tag counting treats "helping people" and "software" as equally important. TF-IDF weights terms by how specific they are — rare, descriptive tags carry more influence than generic ones, producing more nuanced recommendations.
+Simple tag counting treats "helping people" and "software" as equally important. TF-IDF weights terms by how specific they are rare, descriptive tags carry more influence than generic ones, producing more nuanced recommendations.
 
 **Cosine Similarity over Euclidean Distance:**
-Euclidean distance is sensitive to vector magnitude. A user who enters 6 interests would unfairly outscore a user who enters 3 — even if their profile direction is identical. Cosine similarity measures the angle between vectors, making it magnitude-invariant and far more accurate for text data.
+Euclidean distance is sensitive to vector magnitude. A user who enters 6 interests would unfairly outscore a user who enters 3 even if their profile direction is identical. Cosine similarity measures the angle between vectors, making it magnitude-invariant and far more accurate for text data.
 
 ---
 
