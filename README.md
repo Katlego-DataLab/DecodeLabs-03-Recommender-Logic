@@ -1,5 +1,5 @@
-# 🧭 Career Path Recommender
-### recommender logic, DecodeLabs Batch 2026 | Project 03
+# 🧭 Career Path Recommender, Find Your Career Path
+### Recommender Logic, DecodeLabs Batch 2026 | Project 03
 
 ---
 
