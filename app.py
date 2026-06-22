@@ -71,7 +71,7 @@ st.markdown("""
         .main-heading {
             font-family: 'Inter', sans-serif;
             font-weight: 800;
-            font-size: 17.6rem;
+            font-size: 3.5rem;
             color: #ff6b9d;
             line-height: 1.0;
             margin-bottom: 0px;
