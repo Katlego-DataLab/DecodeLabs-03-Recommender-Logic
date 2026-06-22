@@ -10,7 +10,8 @@
 ![Status](https://img.shields.io/badge/Status-Deployed-brightgreen?style=for-the-badge)
 ![DecodeLabs](https://img.shields.io/badge/DecodeLabs-2026-ff6b9d?style=for-the-badge)
 
-> **[🚀 Try the live app here](https://decodelabs-03-recommender-logic-project03mathebula03katlego.streamlit.app/)**
+## TRY TTHE LIVE 
+[![Live App](https://img.shields.io/badge/▶%20LIVE%20APP-Open%20in%20Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white&labelColor=1a0000)](https://decodelabs-03-recommender-logic-project03mathebula03katlego.streamlit.app/)
 
 ---
 
